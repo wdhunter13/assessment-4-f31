@@ -12,7 +12,7 @@ module.exports = {
 
     res.status(200).send(randomCompliment);
   },
-  
+
   getFortune: (req, res) => {
     const fortunes = [
       "A dubious friend may be an enemy in camouflage.",
@@ -26,6 +26,27 @@ module.exports = {
     let randomFortune = fortunes[randomIndex];
 
     res.status(200).send(randomFortune);
-  }
+  },
+
+  addFortune: (req, res) => {
+    let { fortune } = req.body;
+    fortune.push(fortune);
+    res.status(200).send("The fortune has been added");
+  },
+
+  updateFortune: (req, res) => {
+    let { index } = req.params;
+    let { fortune } = req.body;
+
+    fortunes.splice(index, 1, fortune);
+    res.status(200).send("The fortune was updated");
+  },
+
+  deleteFortune: (req, res) => {
+    let { index } = req.params;
+
+    fortunes.splice(index, 1);
+    res.status(200).send("The fortune was deleted");
+  },
 };
  
